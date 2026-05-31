@@ -1,79 +1,112 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
-  <meta name="csp-nonce" content="DHOBQzmqtnYNJ3SxhT1sIQ">
-  <script nonce="DHOBQzmqtnYNJ3SxhT1sIQ">
-    (function() {
-      var meta = document.querySelector('meta[name="csp-nonce"]');
-      var nonce = meta && meta.content;
-      if (!nonce) return;
-
-      function applyNonce(el) {
-        if (!el || !el.tagName) return;
-        if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') {
-          if (!el.hasAttribute('nonce')) el.setAttribute('nonce', nonce);
+<html lang="el"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicky Pafa | Minimal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        if (typeof el.querySelectorAll === 'function') {
-          var nested = el.querySelectorAll('script:not([nonce]), style:not([nonce])');
-          for (var i = 0; i < nested.length; i++) nested[i].setAttribute('nonce', nonce);
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 60px 8%;
         }
-      }
-
-      var originalCreateElement = document.createElement.bind(document);
-      document.createElement = function(tagName, options) {
-        var el = originalCreateElement(tagName, options);
-        if ((tagName === 'script' || tagName === 'style') && nonce) el.setAttribute('nonce', nonce);
-        return el;
-      };
-
-      try {
-        var desc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-        if (desc && desc.set) {
-          Object.defineProperty(Element.prototype, 'innerHTML', {
-            set: function(value) { desc.set.call(this, value); applyNonce(this); },
-            get: desc.get,
-            configurable: true,
-            enumerable: true
-          });
+        header {
+            margin-bottom: 80px;
         }
-      } catch (e) {}
-
-      if ('insertAdjacentHTML' in Element.prototype) {
-        var originalInsertAdjacentHTML = Element.prototype.insertAdjacentHTML;
-        Element.prototype.insertAdjacentHTML = function(position, text) {
-          originalInsertAdjacentHTML.call(this, position, text);
-          applyNonce(this);
-        };
-      }
-
-      if ('MutationObserver' in window) {
-        var observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-            for (var i = 0; i < mutation.addedNodes.length; i++) {
-              var node = mutation.addedNodes[i];
-              if (node.nodeType === 1) applyNonce(node);
+        .logo {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #000000;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px;
+            row-gap: 100px;
+            align-items: center;
+        }
+        .item {
+            position: relative;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .item:hover {
+            opacity: 0.85;
+        }
+        .item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .item-1 {
+            grid-column: 1 / span 4;
+        }
+        .item-2 {
+            grid-column: 5 / span 3;
+            margin-top: -60px;
+        }
+        .item-3 {
+            grid-column: 8 / span 5;
+            margin-top: 100px;
+        }
+        .item-4 {
+            grid-column: 1 / span 3;
+            margin-top: 60px;
+        }
+        .item-5 {
+            grid-column: 4 / span 4;
+            margin-top: -40px;
+        }
+        .item-6 {
+            grid-column: 4 / span 5;
+            margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 40px 20px;
             }
-          });
-        });
-        observer.observe(document.documentElement, { childList: true, subtree: true });
-      }
+            .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 60px;
+            }
+            .item {
+                margin: 0 !important;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Vicky Pafa</a>
+    </header>
+    <main class="grid">
+        <div class="item item-1">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Interior Design">
+        </div>
+        <div class="item item-2">
+            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abad?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Minimal Detail">
+        </div>
+        <div class="item item-3">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Minimal Living Room">
+        </div>
+        <div class="item item-4">
+            <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Architecture Stairs">
+        </div>
+        <div class="item item-5">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="White Interior">
+        </div>
+        <div class="item item-6">
+            <img src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Modern Sofa">
+        </div>
+    </main>
 
-      var all = document.querySelectorAll('script:not([nonce]),style:not([nonce])');
-      for (var i = 0; i < all.length; i++) all[i].setAttribute('nonce', nonce);
-    })();
-  </script>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/static/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
-    <script nonce="DHOBQzmqtnYNJ3SxhT1sIQ" type="module" src="/src/index.tsx"></script>
-    <title>Creative Studio - Chat</title>
-  <script nonce="DHOBQzmqtnYNJ3SxhT1sIQ" defer src="/chat/static/js/lib-react.ac305385.js"></script><script nonce="DHOBQzmqtnYNJ3SxhT1sIQ" defer src="/chat/static/js/lib-router.c2dc59ff.js"></script><script nonce="DHOBQzmqtnYNJ3SxhT1sIQ" defer src="/chat/static/js/1523.68b154cc.js"></script><script nonce="DHOBQzmqtnYNJ3SxhT1sIQ" defer src="/chat/static/js/index.86d23dc4.js"></script><link nonce="DHOBQzmqtnYNJ3SxhT1sIQ" href="/chat/static/css/1523.d0a8ea11.css" rel="stylesheet"><link nonce="DHOBQzmqtnYNJ3SxhT1sIQ" href="/chat/static/css/index.bb877fc9.css" rel="stylesheet"></head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
-</html>
+</body></html>
